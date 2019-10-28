@@ -1,6 +1,7 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { fetchMainPosts } from '../utils/api'
+import PostList from './PostList'
 
 export default class Posts extends React.Component{
     state = {
@@ -40,7 +41,14 @@ export default class Posts extends React.Component{
         const { posts,  error } = this.state
         return(
             <React.Fragment>
-                {posts && <pre>{JSON.stringify(posts, null, 2)}</pre>}
+               { posts && <PostList posts={posts}/>}
+
+
+              {posts && <pre>{JSON.stringify(posts, null, 2)}</pre>}
+
+             
+
+
             </React.Fragment>
         )
     }
