@@ -17,13 +17,13 @@ export default function Nav () {
                     <NavLink activeStyle={activeStyle} to="/new" className='nav-link'>New</NavLink>
                 </li>
             </ul>
-            {/* <button
+            <button
                 style={{fontSize: 30}}
                 className='btn-clear'
-                onClick={toggleTheme}
+                // onClick={}
             >
-                {theme === 'light' ? '🔦' : '💡'}
-            </button> */}
+                {/* {theme === 'light' ? '🔦' : '💡'} */}
+            </button>
         </nav>
     )
 }

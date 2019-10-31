@@ -54,23 +54,24 @@ justify-content: space-between;
 
 }
 
-.link {
+.link_light {
 color: rgb(187, 46, 31);
 text-decoration: none;
 font-weight: bold;
 }
 
-.post {
+.post_light {
 display: flex;
 background: #efefef;
 margin-bottom: 10px;
-padding: 10px 0px;
+padding: 10px 5px;
 }
 
-.description_text{
+.description_text_light{
     color: #555555;
+    padding-top: 5px;
 }
 
-.description_text a{
+.description_text_light a{
     color: #000000
 }

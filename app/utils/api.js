@@ -6,14 +6,8 @@ export function fetchItem(id){
       .then((res) => res.json())
 }
 
-function onlyPosts (posts) {
-    return posts.filter(({ type }) => type === 'story')
-}
-function removeDead (posts) {
-    return posts.filter(Boolean).filter(({ dead }) => dead !== true)
-}
-function removeDeleted (posts) {
-    return posts.filter(({ deleted }) => deleted !== true)
+function removeDescendants(posts){
+  return posts.filter( ({descendants}) => descendants !== undefined);
 }
 
 export function fetchMainPosts (type) {
@@ -27,5 +21,5 @@ export function fetchMainPosts (type) {
         return ids.slice(0, 50)
       })
       .then((ids) => Promise.all(ids.map((id) => fetchItem(id))))
-    //   .then((posts) => removeDeleted(onlyPosts(removeDead(posts))))
+      .then((posts) => removeDescendants(posts))
   }
