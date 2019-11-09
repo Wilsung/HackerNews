@@ -30,10 +30,10 @@ export default class Posts extends React.Component{
             this.setState({posts})
           }) 
           .catch(() => {
-              console.warn('Error fetching repos: ', error)
+              console.warn('Error fetching posts: ', error)
 
               this.setState({
-                error: `There was an error fetching the repositories.`
+                error: `There was an error fetching the posts.`
               })
           }) 
     }

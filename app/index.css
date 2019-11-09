@@ -67,11 +67,20 @@ margin-bottom: 10px;
 padding: 10px 5px;
 }
 
-.description_text_light{
+.description_text_light {
     color: #555555;
     padding-top: 5px;
 }
 
 .description_text_light a{
     color: #000000
+}
+
+.user_data_light{
+    color: #666666; 
+    padding-top: 5px;
+}
+
+.user_header_light{
+    margin: 20px 0px 0px 0px;   
 }

@@ -21,8 +21,7 @@ export default function PostGrid ( {posts} ) {
                             to={{
                                 pathname: '/user',
                                 search: `?id=${by}`
-                            }}
-                            target="_blank">
+                            }}>
                               {by}
                             </Link> on {timeConverter(time)} with <a href="" target="_blank">{comments}</a> comments
                         </li>

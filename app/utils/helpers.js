@@ -14,6 +14,6 @@ export default function timeConverter(UNIX_timestamp){
         hour = 12;
     }
     var min = (a.getMinutes() < 10) ? '0' + a.getMinutes() : a.getMinutes();
-    var time = `${month}/${date}/${year}, ${hour}:${min} ${AMPM}`;
+    var time = `${month+1}/${date}/${year}, ${hour}:${min} ${AMPM}`;
     return time;
 }

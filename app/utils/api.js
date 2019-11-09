@@ -10,6 +10,16 @@ function removeDescendants(posts){
   return posts.filter( ({descendants}) => descendants !== undefined);
 }
 
+export function fetchUser(id){
+  return fetch(`${api}/user/${id}${json}`)
+    .then((res) => res.json())
+}
+
+export function fetchPosts(ids){
+  return Promise.all(ids.map(fetchItem))
+    .then((posts) => removeDescendants(posts))
+}
+
 export function fetchMainPosts (type) {
     return fetch(`${api}/${type}stories${json}`)
       .then((res) => res.json())
