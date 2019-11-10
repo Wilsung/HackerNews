@@ -7,8 +7,8 @@ export function fetchItem(id){
 }
 
 // function onlyPosts(posts){
-//   return posts.filter( ({type}) => type !== 'comment')
-// }
+//   return pos
+
 
 function removeDeleted(comment){
   return comment.filter( ({deleted}) => deleted !== true);

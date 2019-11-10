@@ -46,12 +46,6 @@ export default class Posts extends React.Component{
               {!posts && <Loading />}
               {posts && <PostList posts={posts}/>}
 
-
-              {posts && <pre>{JSON.stringify(posts, null, 2)}</pre>}
-
-             
-
-
             </React.Fragment>
         )
     }

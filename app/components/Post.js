@@ -4,12 +4,14 @@ import { fetchItem, fetchComments } from '../utils/api'
 import Loading from './Loading'
 import { Link } from 'react-router-dom'
 import timeConverter from '../utils/helpers'
+import Comment from './Comment'
 
 export default class Post extends React.Component{
     state = {
         post: null,
         comments: null,
         loadingPost: true,
+        loadingComments: true,
         error: null
     }
 
@@ -21,20 +23,23 @@ export default class Post extends React.Component{
                 post,
                 loadingPost: false
             })
-            return fetchComments(post.kids.slice(0,30))
+            return fetchComments(post.kids ? post.kids.slice(0,30) : [])
          }).then((comments) => {
-            this.setState({comments})
+            this.setState({ 
+                comments,
+                loadingComments: false
+            })
          })
-         .catch(() => {
+         .catch((e) => {
             this.setState({
-                error: `There was an error fetching the posts.`
-              })
-            console.warn('Error fetching post: ', error)
+                error: `There was an error fetching the comments.`
+            })
+            console.warn(e)
         })
     }
     
     render(){
-        const { loadingPost, post } = this.state
+        const { loadingPost, post, comments, loadingComments } = this.state
         return(
             <React.Fragment>
                 {loadingPost === true
@@ -44,7 +49,11 @@ export default class Post extends React.Component{
                     <div className="description_text_light">
                         by <Link to={`/user?id=${post.by}`}>{post.by}</Link> on {timeConverter(post.time)} with <Link to={`/post?id=${post.id}`}>{post.descendants}</Link> comments
                     </div>
-                    
+                    <div>
+                        {loadingComments === true 
+                        ? <Loading text="Loading Comments" />
+                        : <Comment comments={comments}/>}
+                    </div>
                   </div>
                 }
             </React.Fragment>

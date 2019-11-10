@@ -84,3 +84,14 @@ padding: 10px 5px;
 .user_header_light{
     margin: 20px 0px 0px 0px;   
 }
+
+.comment_text_light {
+    background: #efefef;
+    margin-bottom: 10px;
+    padding: 10px;
+    border-radius: 3px;
+}
+
+.comment_text_light a{
+    color: #000000;
+}
