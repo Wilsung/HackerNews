@@ -6,6 +6,14 @@ export function fetchItem(id){
       .then((res) => res.json())
 }
 
+// function onlyPosts(posts){
+//   return posts.filter( ({type}) => type !== 'comment')
+// }
+
+function removeDeleted(comment){
+  return comment.filter( ({deleted}) => deleted !== true);
+}
+
 function removeDescendants(posts){
   return posts.filter( ({descendants}) => descendants !== undefined);
 }
@@ -13,6 +21,11 @@ function removeDescendants(posts){
 export function fetchUser(id){
   return fetch(`${api}/user/${id}${json}`)
     .then((res) => res.json())
+}
+
+export function fetchComments(ids){
+  return Promise.all(ids.map(fetchItem))
+    .then((comment) => removeDeleted(comment))
 }
 
 export function fetchPosts(ids){

@@ -17,13 +17,7 @@ export default function PostGrid ( {posts} ) {
                             <a href={url} target="_blank" className='link_light'>{title}</a>
                         </li>
                         <li className="description_text_light">
-                        by <Link 
-                            to={{
-                                pathname: '/user',
-                                search: `?id=${by}`
-                            }}>
-                              {by}
-                            </Link> on {timeConverter(time)} with <a href="" target="_blank">{comments}</a> comments
+                            by <Link to={`/user?id=${by}`}>{by}</Link> on {timeConverter(time)} with <Link to={`/post?id=${id}`}>{comments}</Link> comments
                         </li>
                     </ul>
                 </li>

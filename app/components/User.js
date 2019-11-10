@@ -49,13 +49,14 @@ export default class User extends React.Component{
                         </div>
 
                         {user.about && <p dangerouslySetInnerHTML={{__html: user.about}} />}
-                    </React.Fragment>
-                }
-                {loadingPosts === true 
-                  ? <Loading text="Loading Posts" /> 
-                  : <React.Fragment>
-                      <h2>Posts</h2>
-                      <PostList posts={posts} />
+                        {loadingPosts === true 
+                        ? <Loading text="Loading Posts" /> 
+                        : <React.Fragment>
+                            <h2>Posts</h2>
+                            <PostList posts={posts} />
+                            {posts.length === 0 && <p className='flex-center'>This user hasn't posted yet.</p>}
+                          </React.Fragment>
+                        }
                     </React.Fragment>
                 }
             </React.Fragment>
