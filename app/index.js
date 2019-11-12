@@ -2,25 +2,42 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import './index.css'
 import {BrowserRouter as Router, Route, Switch} from 'react-router-dom'
-import Posts from './components/Posts'
 import Nav from './components/Nav'
-import User from './components/User'
-import Post from './components/Post' 
+import Loading from './components/Loading'
+import { ThemeProvider } from './contexts/theme'
+
+const User = React.lazy ( () => import('./components/User'))
+const Post = React.lazy ( () => import('./components/Post'))
+const Posts = React.lazy ( () => import('./components/Posts'))
 
 class App extends React.Component{
+    state = {
+        theme: 'light',
+        toggleTheme: () => {
+            this.setState( ({theme}) => ({
+                theme: theme === 'light' ? 'dark' : 'light'
+            }))
+        }
+    }
     render(){
         return (
             <Router>
-                <div className='container'>
-                    <Nav />
-                    <Switch>
-                        <Route exact path='/' render={()=> <Posts type='top'/>}/>
-                        <Route path='/new' render={()=> <Posts type='new'/>}/>
-                        <Route path='/user' component={User} />
-                        <Route path='/post' component={Post} />
-                        <Route render={() => (<h1>404</h1>)}/>
-                    </Switch>
-                </div>
+                <ThemeProvider value={this.state}>
+                    <div className={this.state.theme}>
+                        <div className='container'>
+                                <Nav />
+                                <React.Suspense fallback={<Loading/>}>
+                                <Switch>
+                                    <Route exact path='/' render={()=> <Posts type='top'/>}/>
+                                    <Route path='/new' render={()=> <Posts type='new'/>}/>
+                                    <Route path='/user' component={User} />
+                                    <Route path='/post' component={Post} />
+                                    <Route render={() => (<h1>404</h1>)}/>
+                                </Switch>
+                            </React.Suspense>
+                        </div>
+                    </div>
+                </ThemeProvider>
             </Router>
         )
     }

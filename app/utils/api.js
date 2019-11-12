@@ -6,10 +6,6 @@ export function fetchItem(id){
       .then((res) => res.json())
 }
 
-// function onlyPosts(posts){
-//   return pos
-
-
 function removeDeleted(comment){
   return comment.filter( ({deleted}) => deleted !== true);
 }

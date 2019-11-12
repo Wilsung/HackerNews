@@ -5,6 +5,7 @@ import Loading from './Loading'
 import { Link } from 'react-router-dom'
 import timeConverter from '../utils/helpers'
 import Comment from './Comment'
+import { ThemeConsumer } from '../contexts/theme'
 
 export default class Post extends React.Component{
     state = {
@@ -41,22 +42,26 @@ export default class Post extends React.Component{
     render(){
         const { loadingPost, post, comments, loadingComments } = this.state
         return(
-            <React.Fragment>
-                {loadingPost === true
-                ? <Loading text='Loading Post'/>
-                : <div>
-                    <h1 className="user_header_light"><a href={post.url} target="_blank" className='link_light'>{post.title}</a></h1>
-                    <div className="description_text_light">
-                        by <Link to={`/user?id=${post.by}`}>{post.by}</Link> on {timeConverter(post.time)} with <Link to={`/post?id=${post.id}`}>{post.descendants}</Link> comments
-                    </div>
-                    <div>
-                        {loadingComments === true 
-                        ? <Loading text="Loading Comments" />
-                        : <Comment comments={comments}/>}
-                    </div>
-                  </div>
-                }
-            </React.Fragment>
+            <ThemeConsumer>
+                { ({ theme }) => (
+                    <React.Fragment>
+                        {loadingPost === true
+                        ? <Loading text='Loading Post'/>
+                        : <div>
+                            <h1 className='user_header'><a href={post.url} target="_blank" className={`link_${theme}`}>{post.title}</a></h1>
+                            <div className={`description_text_${theme}`}>
+                                by <Link to={`/user?id=${post.by}`}>{post.by}</Link> on {timeConverter(post.time)} with <Link to={`/post?id=${post.id}`}>{post.descendants}</Link> comments
+                            </div>
+                            <div>
+                                {loadingComments === true 
+                                ? <Loading text="Loading Comments" />
+                                : <Comment comments={comments}/>}
+                            </div>
+                        </div>
+                        }
+                    </React.Fragment>
+                )}
+            </ThemeConsumer>
         )
     }
 }
